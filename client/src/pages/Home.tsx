@@ -23,7 +23,7 @@ export default function Home() {
 
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent leading-tight" data-testid="text-hero-title">
-            Embiggen Your Eyes
+            Galactic Gallery
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed" data-testid="text-hero-subtitle">
             Dive deep into the cosmos through NASA's high-resolution imagery — explore celestial bodies like never before

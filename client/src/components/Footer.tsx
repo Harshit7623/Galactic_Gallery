@@ -9,7 +9,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
               <Rocket className="h-5 w-5 text-primary" />
-              <span className="font-display font-bold tracking-tight">Embiggen Your Eyes</span>
+              <span className="font-display font-bold tracking-tight">Galactic Gallery</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Explore the cosmos through NASA's stunning imagery with our interactive space exploration portal.
@@ -43,7 +43,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>© 2025 Embiggen Your Eyes. Data courtesy of NASA.</p>
+          <p>© 2025 Galactic Gallery. Data courtesy of NASA.</p>
         </div>
       </div>
     </footer>

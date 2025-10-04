@@ -11,12 +11,12 @@ export default function About() {
       <main className="flex-1 py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <h1 className="font-display text-4xl md:text-5xl font-bold mb-6" data-testid="text-page-title">
-            About Embiggen Your Eyes
+            About Galactic Gallery
           </h1>
           
           <div className="prose prose-lg dark:prose-invert mb-12">
             <p className="text-lg text-muted-foreground" data-testid="text-intro">
-              Embiggen Your Eyes is an interactive space exploration portal that brings NASA's stunning
+              Galactic Gallery is an interactive space exploration portal that brings NASA's stunning
               planetary and lunar imagery to your fingertips. Using advanced zoomable image technology,
               we enable you to explore celestial bodies in unprecedented detail.
             </p>
