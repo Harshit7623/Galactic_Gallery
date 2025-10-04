@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import OpenSeadragon from 'openseadragon';
 import { Button } from '@/components/ui/button';
-import { Save, Download, Pencil, MapPin } from 'lucide-react';
+import { Save, Download, Pencil, MapPin, Maximize2, Minimize2, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import {
   Dialog,
@@ -13,6 +13,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
 interface ImageViewerProps {
   imageUrl: string;
@@ -24,6 +26,8 @@ export function ImageViewer({ imageUrl, imageName = 'Space Image' }: ImageViewer
   const osdViewerRef = useRef<OpenSeadragon.Viewer | null>(null);
   const [isAnnotating, setIsAnnotating] = useState(false);
   const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [saveName, setSaveName] = useState('');
   const [saveNote, setSaveNote] = useState('');
   const { toast } = useToast();
@@ -89,48 +93,145 @@ export function ImageViewer({ imageUrl, imageName = 'Space Image' }: ImageViewer
     });
   };
 
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
   return (
-    <div className="relative h-full w-full">
-      <div ref={viewerRef} className="h-full w-full bg-black" data-testid="viewer-container" />
-      
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10">
-        <div className="flex items-center gap-2 rounded-md border bg-card/80 backdrop-blur-lg p-2 shadow-lg">
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={() => setShowSaveDialog(true)}
-            data-testid="button-save-view"
-          >
-            <Save className="mr-2 h-4 w-4" />
-            Save View
-          </Button>
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={handleDownload}
-            data-testid="button-download"
-          >
-            <Download className="mr-2 h-4 w-4" />
-            Download
-          </Button>
-          <Button
-            size="sm"
-            variant={isAnnotating ? 'secondary' : 'ghost'}
-            onClick={toggleAnnotation}
-            data-testid="button-annotate"
-          >
-            <Pencil className="mr-2 h-4 w-4" />
-            Annotate
-          </Button>
-          <Button
-            size="sm"
-            variant="ghost"
-            data-testid="button-add-marker"
-          >
-            <MapPin className="mr-2 h-4 w-4" />
-            Add Marker
-          </Button>
-        </div>
+    <div className="relative h-full w-full flex">
+      <div 
+        className={`transition-all duration-300 ${
+          isSidebarCollapsed ? 'w-0' : 'w-80'
+        } flex-shrink-0`}
+      >
+        <Card className={`h-full rounded-none border-r border-l-0 border-t-0 border-b-0 ${isSidebarCollapsed ? 'hidden' : ''}`}>
+          <CardHeader className="border-b">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">Tools</CardTitle>
+              <Button
+                size="icon"
+                variant="ghost"
+                onClick={() => setIsSidebarCollapsed(true)}
+                data-testid="button-collapse-sidebar"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent className="p-4 space-y-3">
+            <div>
+              <h3 className="text-sm font-semibold mb-2 text-muted-foreground">VIEW</h3>
+              <div className="space-y-2">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="w-full justify-start"
+                  onClick={toggleFullscreen}
+                  data-testid="button-fullscreen"
+                >
+                  {isFullscreen ? (
+                    <><Minimize2 className="mr-2 h-4 w-4" /> Exit Fullscreen</>
+                  ) : (
+                    <><Maximize2 className="mr-2 h-4 w-4" /> Enter Fullscreen</>
+                  )}
+                </Button>
+              </div>
+            </div>
+
+            <Separator />
+
+            <div>
+              <h3 className="text-sm font-semibold mb-2 text-muted-foreground">ACTIONS</h3>
+              <div className="space-y-2">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="w-full justify-start"
+                  onClick={() => setShowSaveDialog(true)}
+                  data-testid="button-save-view"
+                >
+                  <Save className="mr-2 h-4 w-4" />
+                  Save Current View
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="w-full justify-start"
+                  onClick={handleDownload}
+                  data-testid="button-download"
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Section
+                </Button>
+              </div>
+            </div>
+
+            <Separator />
+
+            <div>
+              <h3 className="text-sm font-semibold mb-2 text-muted-foreground">ANNOTATIONS</h3>
+              <div className="space-y-2">
+                <Button
+                  size="sm"
+                  variant={isAnnotating ? 'default' : 'secondary'}
+                  className="w-full justify-start"
+                  onClick={toggleAnnotation}
+                  data-testid="button-annotate"
+                >
+                  <Pencil className="mr-2 h-4 w-4" />
+                  {isAnnotating ? 'Drawing Mode: ON' : 'Enable Drawing'}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="w-full justify-start"
+                  data-testid="button-add-marker"
+                >
+                  <MapPin className="mr-2 h-4 w-4" />
+                  Add Location Marker
+                </Button>
+              </div>
+            </div>
+
+            <Separator />
+
+            <div className="pt-2">
+              <p className="text-xs text-muted-foreground mb-2">Current Image</p>
+              <p className="text-sm font-medium">{imageName}</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {isSidebarCollapsed && (
+        <Button
+          size="sm"
+          variant="secondary"
+          className="absolute left-2 top-2 z-20"
+          onClick={() => setIsSidebarCollapsed(false)}
+          data-testid="button-expand-sidebar"
+        >
+          Tools
+        </Button>
+      )}
+
+      <div className="flex-1 relative">
+        <div ref={viewerRef} className="h-full w-full bg-black" data-testid="viewer-container" />
       </div>
 
       <Dialog open={showSaveDialog} onOpenChange={setShowSaveDialog}>

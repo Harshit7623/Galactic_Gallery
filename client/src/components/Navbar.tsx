@@ -28,9 +28,9 @@ export function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-8">
           <Link href="/">
-            <a className="flex items-center gap-2 hover-elevate active-elevate-2 rounded-md px-2 py-1" data-testid="link-home">
-              <Rocket className="h-6 w-6 text-primary" />
-              <span className="font-display text-xl font-bold">Embiggen Your Eyes</span>
+            <a className="flex items-center gap-2.5 hover-elevate active-elevate-2 rounded-md px-2 py-1" data-testid="link-home">
+              <Rocket className="h-5 w-5 text-primary" />
+              <span className="font-display text-lg font-bold tracking-tight">Embiggen Your Eyes</span>
             </a>
           </Link>
           <nav className="hidden md:flex items-center gap-1">

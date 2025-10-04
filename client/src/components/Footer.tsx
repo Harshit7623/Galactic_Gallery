@@ -7,11 +7,11 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <Rocket className="h-5 w-5 text-primary" />
-              <span className="font-display font-bold">Embiggen Your Eyes</span>
+              <span className="font-display font-bold tracking-tight">Embiggen Your Eyes</span>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               Explore the cosmos through NASA's stunning imagery with our interactive space exploration portal.
             </p>
           </div>

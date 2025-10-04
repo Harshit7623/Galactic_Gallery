@@ -18,14 +18,15 @@ export default function Home() {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-background" />
+          <div className="stars-container" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent" data-testid="text-hero-title">
+          <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent leading-tight" data-testid="text-hero-title">
             Embiggen Your Eyes
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto" data-testid="text-hero-subtitle">
-            Explore the cosmos through NASA's stunning imagery with infinite zoom capabilities
+          <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed" data-testid="text-hero-subtitle">
+            Dive deep into the cosmos through NASA's high-resolution imagery — explore celestial bodies like never before
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href="/explorer">
@@ -53,9 +54,12 @@ export default function Home() {
 
       <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-12">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-4">
             Powerful Features
           </h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Everything you need to explore and document your cosmic discoveries
+          </p>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center space-y-4" data-testid="feature-zoom">
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
