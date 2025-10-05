@@ -1,4 +1,4 @@
-import { Navbar } from '@/components/Navbar';
+import Navbar from '@/components/Navbar';
 import { ImageViewer } from '@/components/ImageViewer';
 import moonImage from '@assets/generated_images/Moon_surface_sample_image_a49cb8f7.png';
 

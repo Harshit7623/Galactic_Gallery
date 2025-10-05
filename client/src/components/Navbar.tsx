@@ -12,7 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
 
-export function Navbar() {
+function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { isAuthenticated, user, logout } = useAuth();
   const [location, setLocation] = useLocation();
@@ -111,3 +111,5 @@ export function Navbar() {
     </header>
   );
 }
+
+export { Navbar };

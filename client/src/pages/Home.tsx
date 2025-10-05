@@ -1,7 +1,7 @@
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import { ChevronDown, Telescope, Save, Pencil, Zap } from 'lucide-react';
 import heroImage from '@assets/generated_images/Space_nebula_hero_background_8cf15a78.png';
 

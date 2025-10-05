@@ -1,7 +1,7 @@
 import { Link } from 'wouter';
 import { Rocket } from 'lucide-react';
 
-export function Footer() {
+function Footer() {
   return (
     <footer className="border-t bg-card">
       <div className="container mx-auto px-4 py-12">
@@ -43,9 +43,11 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>© 2025 Galactic Gallery. Data courtesy of NASA.</p>
+          <p> 2025 Galactic Gallery. Data courtesy of NASA.</p>
         </div>
       </div>
     </footer>
   );
 }
+
+export { Footer };
