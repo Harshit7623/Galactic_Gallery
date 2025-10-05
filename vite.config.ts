@@ -4,33 +4,30 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
+  root: path.resolve("./client"),
+  build: {
+    outDir: path.resolve("./dist/public"),
+    emptyOutDir: true,
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve("./client/src"),
+      "@shared": path.resolve("./shared"),
+      "@assets": path.resolve("./attached_assets"),
+    },
+  },
   plugins: [
     react(),
     runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
+    // Conditional plugins for dev environment
+    ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID
       ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
-          ),
-          await import("@replit/vite-plugin-dev-banner").then((m) =>
-            m.devBanner(),
-          ),
+          // @replit plugins for development only
+          require("@replit/vite-plugin-cartographer")().cartographer(),
+          require("@replit/vite-plugin-dev-banner")().devBanner(),
         ]
       : []),
   ],
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
-    },
-  },
-  root: path.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
   server: {
     fs: {
       strict: true,
